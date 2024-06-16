@@ -14,7 +14,8 @@ func add_coin():
 	coin_num.text = str(coins)
 
 func lostlives(player):
-	player.animated_sprite.play("hit")
+	player.is_hit = true
+	player.hit_timer.start(0.9) # 播放 hit 动画 0.5 秒，然后恢复正常
 	lives -= 1
 	if lives == 2:
 		heart_3.visible = false
@@ -22,13 +23,12 @@ func lostlives(player):
 		heart_2.visible = false
 	if lives == 0:
 		heart.visible = false
-		player.animated_sprite.play("die")
+		player.is_dead = true
 		player.get_node("CollisionShape2D").queue_free()
 		timer.start()
 
-
-
-
-
 func _on_timer_timeout():
 	get_tree().reload_current_scene()
+
+func _ready():
+	timer.connect("timeout", Callable(self, "_on_timer_timeout"))
