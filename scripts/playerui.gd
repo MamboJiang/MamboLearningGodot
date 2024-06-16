@@ -7,6 +7,7 @@ var coins = 0
 @onready var heart = $Heart
 @onready var heart_2 = $Heart2
 @onready var heart_3 = $Heart3
+@onready var timer = $Timer
 
 func add_coin():
 	coins += 1
@@ -23,4 +24,11 @@ func lostlives(player):
 		heart.visible = false
 		player.animated_sprite.play("die")
 		player.get_node("CollisionShape2D").queue_free()
-		get_tree().reload_current_scene()
+		timer.start()
+
+
+
+
+
+func _on_timer_timeout():
+	get_tree().reload_current_scene()

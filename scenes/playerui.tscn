@@ -65,3 +65,8 @@ offset_bottom = 27.0
 text = "0"
 label_settings = SubResource("LabelSettings_q1bsq")
 metadata/_edit_use_anchors_ = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.512
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
