@@ -1,0 +1,67 @@
+[gd_scene load_steps=6 format=3 uid="uid://cn2aqyn8fxgas"]
+
+[ext_resource type="Script" path="res://scripts/playerui.gd" id="1_2i053"]
+[ext_resource type="Texture2D" uid="uid://hhthqgw6cto0" path="res://assets/sprites/ui.png" id="1_t2ea6"]
+[ext_resource type="Texture2D" uid="uid://1fqaoj02f3or" path="res://assets/sprites/coin.png" id="2_m3w5m"]
+[ext_resource type="FontFile" uid="uid://d11tash7u6byw" path="res://assets/fonts/PixelOperator8.ttf" id="3_0i1ou"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_q1bsq"]
+font = ExtResource("3_0i1ou")
+font_size = 8
+shadow_size = 2
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(2.08165e-12, 2.08165e-12)
+
+[node name="PlayerUI" type="CanvasLayer"]
+script = ExtResource("1_2i053")
+
+[node name="NullHeart" type="Sprite2D" parent="."]
+position = Vector2(9, 7)
+texture = ExtResource("1_t2ea6")
+region_enabled = true
+region_rect = Rect2(1, 18, 14, 12)
+
+[node name="NullHeart2" type="Sprite2D" parent="."]
+position = Vector2(25, 7)
+texture = ExtResource("1_t2ea6")
+region_enabled = true
+region_rect = Rect2(1, 18, 14, 12)
+
+[node name="NullHeart3" type="Sprite2D" parent="."]
+position = Vector2(41, 7)
+texture = ExtResource("1_t2ea6")
+region_enabled = true
+region_rect = Rect2(1, 18, 14, 12)
+
+[node name="Heart" type="Sprite2D" parent="."]
+position = Vector2(9, 7)
+texture = ExtResource("1_t2ea6")
+region_enabled = true
+region_rect = Rect2(1, 35, 14, 11)
+
+[node name="Heart2" type="Sprite2D" parent="."]
+position = Vector2(25, 7)
+texture = ExtResource("1_t2ea6")
+region_enabled = true
+region_rect = Rect2(1, 35, 14, 11)
+
+[node name="Heart3" type="Sprite2D" parent="."]
+position = Vector2(41, 7)
+texture = ExtResource("1_t2ea6")
+region_enabled = true
+region_rect = Rect2(1, 35, 14, 11)
+
+[node name="Coin" type="Sprite2D" parent="."]
+position = Vector2(69, 7)
+texture = ExtResource("2_m3w5m")
+region_enabled = true
+region_rect = Rect2(3, 3, 10, 10)
+
+[node name="CoinNum" type="Label" parent="."]
+offset_left = 77.0
+offset_top = 4.0
+offset_right = 117.0
+offset_bottom = 27.0
+text = "0"
+label_settings = SubResource("LabelSettings_q1bsq")
+metadata/_edit_use_anchors_ = true
