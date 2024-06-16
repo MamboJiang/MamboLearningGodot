@@ -9,25 +9,25 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 @onready var animated_sprite = $AnimatedSprite2D
 
-func _physics_process(delta):
-	# Add the gravity.
+func player_move(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
-
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
-
-		
 	# Get the input direction: -1, 0, 1
 	var direction = Input.get_axis("move_left", "move_right")
-
-	# Flip the Sprite
+	if direction:
+		velocity.x = direction * SPEED
+	else:
+		velocity.x = move_toward(velocity.x, 0, SPEED)
+	
+func player_animation():
+	var direction = Input.get_axis("move_left", "move_right")
 	if direction > 0:
 		animated_sprite.flip_h = false
 	elif direction < 0:
 		animated_sprite.flip_h = true
-		
 	# Play animations
 	if is_on_floor():
 		if direction == 0:
@@ -37,11 +37,15 @@ func _physics_process(delta):
 	else:
 		animated_sprite.play("jump")
 	
-		
+func player_push_box():
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		if collision.get_collider().is_in_group("Box"):
+			collision.get_collider().apply_central_impulse(-collision.get_normal() * 50)
 
-	if direction:
-		velocity.x = direction * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-
+func _physics_process(delta):
+	player_move(delta)
+	player_animation()
 	move_and_slide()
+	player_push_box()
+
